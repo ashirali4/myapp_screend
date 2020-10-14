@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:footballapp/LoginSignup/Login.dart';
+import 'package:footballapp/dashboard/Dashboard.dart';
 import 'package:footballapp/router.dart';
 
 import 'LoginSignup/Getstarted/started.dart';
@@ -18,13 +19,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Football Sccore Demo',
       theme: ThemeData(
+        brightness: Brightness.dark,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
 
       ),
       onGenerateRoute: generateRoute,
       debugShowCheckedModeBanner: false,
-      home: Getting_Started(),
+      home: Dashboard(),
     );
   }
 }
