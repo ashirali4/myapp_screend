@@ -15,7 +15,7 @@ class _Home_PageState extends State<Home_Page> {
           color: Colors.black,
           image: new DecorationImage(
             fit: BoxFit.cover,
-            colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
+            colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.25), BlendMode.dstATop),
             image: new AssetImage("assets/homebg.jpg"),
           ),
         ),
@@ -118,7 +118,9 @@ class _Home_PageState extends State<Home_Page> {
 
                       child: Row(
                         children: [
-                          Radio(),
+                         Expanded(flex: 1,
+                         child:  Container(
+                             child: Radio()),)
                         ],
                       ),
 
