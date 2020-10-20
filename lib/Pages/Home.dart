@@ -17,7 +17,6 @@ class _Home_PageState extends State<Home_Page> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        height: MediaQuery.of(context).size.height,
         decoration: new BoxDecoration(
           color: Colors.black,
           image: new DecorationImage(
