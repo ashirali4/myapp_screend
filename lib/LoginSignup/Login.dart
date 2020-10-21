@@ -239,8 +239,7 @@ class _LoginState extends State<Login> {
                                         email: emailcont.text,
                                         password: passcont.text,
                                         )).user;
-                                    _responsehandle(user,message("Login Successfully", Icons.check_circle_outline, Colors.green));
-
+                                     Navigator.pushNamed(context, "dashboard");
                                     }
                                     catch (error) {
                                     //print(error.code);

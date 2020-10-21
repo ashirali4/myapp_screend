@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:footballapp/Icons/my_flutter_app_icons.dart';
 class Home_Page extends StatefulWidget {
   @override
   _Home_PageState createState() => _Home_PageState();
@@ -16,29 +17,54 @@ class _Home_PageState extends State<Home_Page> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: new BoxDecoration(
-          color: Colors.black,
-          image: new DecorationImage(
-            fit: BoxFit.cover,
-            colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.25), BlendMode.dstATop),
-            image: new AssetImage("assets/homebg.jpg"),
+        child:Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: new BoxDecoration(
+            color: Colors.black,
+            image: new DecorationImage(
+              fit: BoxFit.cover,
+              colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.25), BlendMode.dstATop),
+              image: new AssetImage("assets/homebg.jpg"),
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: ListView.separated(
-            itemCount: 5,
-            separatorBuilder: (BuildContext context, int index)  {
-              return SizedBox(height: 15,);
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return matchlistitem(index);
-            },
-          )
-        ),
-      ),
+          child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: 6,
+                      separatorBuilder: (BuildContext context, int index)  {
+                        return SizedBox(height: 18,);
+                      },
+                      padding: EdgeInsets.only(bottom: 20),
+                      itemBuilder: (BuildContext context, int index) {
+                        return matchlistitem(index);
+                      },
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          side: BorderSide(color: Colors.green)),
+                      onPressed: () {
+                        Navigator.pushNamed(context, "signup");
+                      },
+                      color: Colors.green,
+                      textColor: Colors.white,
+                      child: Text("Send Pools",
+                          style: TextStyle(fontSize: 14)),
+                    ),
+                  ),
+
+                ],
+              )
+
+          ),
+        )
     );
   }
 
@@ -50,6 +76,35 @@ class _Home_PageState extends State<Home_Page> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(MyFlutterApp.clock,color: Colors.white,size: 15,),
+                    Text(" OCT 15 / 21:00PM",style: TextStyle(
+                      fontFamily: "OpenSans",fontSize: 13
+                    ),),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(MyFlutterApp.stadium,color: Colors.white,size: 15,),
+                    Text(" VICTORIA STADIUM",style: TextStyle(
+                        fontFamily: "OpenSans",fontSize: 13
+                    ),),
+                  ],
+                ),
+              )
+            ],
+          ),
+          SizedBox(height: 05,),
           Container(
             decoration: BoxDecoration(
               border: Border.all(
