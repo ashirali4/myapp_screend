@@ -26,11 +26,11 @@ class _MyResultState extends State<MyResult> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("All time Points",textAlign: TextAlign.start,
+                  Text("This Week Points",textAlign: TextAlign.start,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontFamily: "pb",
-                        fontSize: 40
+                        fontSize: 30
                     ),),
                   Container(
                     height: 70,
@@ -67,7 +67,7 @@ class _MyResultState extends State<MyResult> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text("This Week Points",textAlign: TextAlign.start,
+                            Text("Weekly Correct Picks",textAlign: TextAlign.start,
                               style: TextStyle(
                                   fontWeight: FontWeight.w300,
                                   fontFamily: "pb",

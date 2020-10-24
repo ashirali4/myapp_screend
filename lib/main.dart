@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Football Sccore Demo',
+      title: 'Qui',
       theme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
