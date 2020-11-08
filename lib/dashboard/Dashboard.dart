@@ -1,13 +1,36 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
 import 'package:footballapp/Pages/Home.dart';
 import 'package:footballapp/Pages/MyResult.dart';
+
+import '../APIcalls.dart';
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final databaseReference = FirebaseDatabase.instance.reference();
+
+  User user;
+
+  @override
+  void initState()  {
+    // TODO: implement initState
+     user= auth.currentUser;
+     super.initState();
+  }
+  Future<String> loadnmae() async {
+   String temp;
+    await databaseReference.child("Users").child(user.uid).child("name").once().then((DataSnapshot snapshot) {
+      temp=snapshot.value;
+    });
+    return temp;
+  }
+
   @override
   int currentindex=0;
   List<Widget> mypages=[
@@ -15,11 +38,13 @@ class _DashboardState extends State<Dashboard> {
     MyResult()
   ];
   Widget build(BuildContext context) {
+
+   print("kkk");
     return Scaffold(
       backgroundColor: Color(0xff1B2439),
       appBar: AppBar(
         backgroundColor: Color(0xFf1BE37E),
-        title: Text("Fooball Bidder"),
+        title: Text("Quiniela Futbolera"),
       ),
       drawer: Theme(
       data: Theme.of(context).copyWith(
@@ -65,17 +90,30 @@ class _DashboardState extends State<Dashboard> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                new FutureBuilder<String>(
+                                  future: loadnmae(), // a Future<String> or null
+                                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                                    switch (snapshot.connectionState) {
+                                      case ConnectionState.none: return new Text('Press button to start');
+                                      case ConnectionState.waiting: return new Text('Awaiting result...');
+                                      default:
+                                        if (snapshot.hasError)
+                                          return new Text('Error: ${snapshot.error}');
+                                        else
+                                          return Text(
+                                            snapshot.data,
+                                            style: TextStyle(
+                                                color: Colors.white.withOpacity(.7),
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          );
+                                    }
+                                  },
+                                ),
 
                                 Text(
-                                  "Ashir Ali",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(.7),
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                                Text(
-                                  "ashir@gmail.com",
+                                  user.email,
                                   style: TextStyle(color: Colors.white.withOpacity(.7),
                                     fontSize: 15.0,
                                   ),

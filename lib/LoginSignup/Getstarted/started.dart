@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
@@ -11,8 +12,11 @@ class _Getting_StartedState extends State<Getting_Started> {
   @override
   initState(){
     SystemChrome.setEnabledSystemUIOverlays([]);
+
   }
   Widget build(BuildContext context) {
+   // createData();
+
     SystemChrome.setEnabledSystemUIOverlays([]);
     return SafeArea(
       child: Scaffold(

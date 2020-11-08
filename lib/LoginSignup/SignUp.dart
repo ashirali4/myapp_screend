@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:footballapp/Components/loader.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
+
+import '../APIcalls.dart';
 class SignUp extends StatefulWidget {
   @override
   SignUpState createState() => SignUpState();
@@ -12,9 +15,11 @@ class SignUpState extends State<SignUp> {
   final formkey=new GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool radio=false;
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _fullnameController = TextEditingController();
+  final databaseReference = FirebaseDatabase.instance.reference();
 
   bool _success;
   String _userEmail;
@@ -212,6 +217,7 @@ class SignUpState extends State<SignUp> {
                                           password: _passwordController.text,
                                         )
                                         ).user;
+                                        insert_user_info(user.uid,user.email,_fullnameController.text);
                                         _responsehandle(user,message("Sign Up Completed", Icons.check_circle_outline, Colors.green));
 
                                       } catch (error) {

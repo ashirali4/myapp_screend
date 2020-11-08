@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Qui',
+      title: 'Quiniela Futbolera',
       theme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: generateRoute,
       debugShowCheckedModeBanner: false,
-      home:Dashboard(),
+      home:Getting_Started(),
       //Getting_Started(),
     );
   }

@@ -21,3 +21,18 @@ Widget onLoading(BuildContext context)
 
 
 
+
+Widget Loaderfor()
+{
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      CircularProgressIndicator(
+        valueColor: new AlwaysStoppedAnimation<Color>(Colors.green),
+      ),
+    ],
+  );
+}
+
+
+
