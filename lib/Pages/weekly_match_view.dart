@@ -4,11 +4,14 @@ import 'package:footballapp/Components/loader.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
 import 'package:footballapp/model/load_matches_api_model.dart';
 import 'package:footballapp/model/match_entry_model.dart';
+import 'package:footballapp/model/sender_fromweek_one.dart';
 
 import '../APIcalls.dart';
 class Weekly_Match_View extends StatefulWidget {
+  sender mylist;
   @override
   _Weekly_Match_ViewState createState() => _Weekly_Match_ViewState();
+  Weekly_Match_View(this.mylist);
 }
 
 class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
@@ -22,7 +25,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
   int selectedRadio=0;
   void initState(){
     user= auth.currentUser;
-    mylist=fetch_matches();
+  //  mylist=fetch_matches();
 
   }
   setSelectedRadio(int val,int index) {
@@ -36,31 +39,17 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
       child: Column(
         children: [
           Expanded(
-            child:  FutureBuilder<LoadMatchesApiModel>(
-              future: mylist, // a Future<String> or null
-              builder: (BuildContext context, AsyncSnapshot<LoadMatchesApiModel> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none: return new Text('Press button to start');
-                  case ConnectionState.waiting: return Loaderfor();
-                  default:
-                    if (snapshot.hasError)
-                      return new Text('Error: ${snapshot.error}');
-                    else
-                      return
-                        ListView.separated(
-                          itemCount: snapshot.data.result.length,
-                          separatorBuilder: (BuildContext context, int index)  {
-                            return SizedBox(height: 18,);
-                          },
-                          padding: EdgeInsets.only(bottom: 20),
-                          itemBuilder: (BuildContext context, int index) {
-                           model=new match_entry_model(Selectedvalue.toString(),"0",snapshot.data.result[index].eventKey);
-                           matches.add(model);
+            child: ListView.separated(
+              itemCount: widget.mylist.obj.length,
+              separatorBuilder: (BuildContext context, int index)  {
+                return SizedBox(height: 18,);
+              },
+              padding: EdgeInsets.only(bottom: 20),
+              itemBuilder: (BuildContext context, int index) {
+                model=new match_entry_model(Selectedvalue.toString(),"0",widget.mylist.obj[index].eventKey);
+                matches.add(model);
 
-                           return matchlistitem(index,snapshot.data);
-                          },
-                        );
-                }
+                return matchlistitem(index,widget.mylist.obj);
               },
             ),
           ),
@@ -75,7 +64,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
 
                 for(int a=0;a<matches.length;a++){
                 //  print(matches[a].winteamkey);
-                  insert_weekly_matches("JO1",matches[a].matchid,matches[a],user.uid);
+                  insert_weekly_matches(widget.mylist.week,matches[a].matchid,matches[a],user.uid);
                 }
 
               },
@@ -90,8 +79,8 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
       ),
     );
   }
-  Widget matchlistitem(int index,LoadMatchesApiModel object){
-    groupvalues.add(int.parse(object.result[index].eventKey));
+  Widget matchlistitem(int index,List<Result> object){
+    groupvalues.add(int.parse(object[index].eventKey));
     print('adding agin');
     print(matches[index].winteamkey);
     return Container(
@@ -107,7 +96,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(MyFlutterApp.clock,color: Colors.white,size: 15,),
-                    Text(object.result[index].eventDate.toString(),style: TextStyle(
+                    Text(object[index].eventDate.toString(),style: TextStyle(
                         fontFamily: "OpenSans",fontSize: 13
                     ),),
                   ],
@@ -119,7 +108,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Icon(MyFlutterApp.stadium,color: Colors.white,size: 15,),
-                    Text(object.result[index].countryName,style: TextStyle(
+                    Text(object[index].countryName,style: TextStyle(
                         fontFamily: "OpenSans",fontSize: 13
                     ),),
                   ],
@@ -147,7 +136,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       flex: 8,
                       child: Column(
                         children: [
-                          Text(object.result[index].eventAwayTeam
+                          Text(object[index].eventAwayTeam
                             ,style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black.withOpacity(.7),
@@ -159,7 +148,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                           Container(
                               height: 50,
                               width: 50,
-                              child: Image.network(object.result[index].awayTeamLogo)),
+                              child: Image.network(object[index].awayTeamLogo)),
                         ],
                       ),
                     ),
@@ -182,7 +171,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       flex: 8,
                       child: Column(
                         children: [
-                          Text(object.result[index].eventHomeTeam
+                          Text(object[index].eventHomeTeam
                             ,style: TextStyle(
                               color: Colors.black.withOpacity(.7),
                               fontWeight: FontWeight.bold,
@@ -194,7 +183,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                           Container(
                               height: 50,
                               width: 50,
-                              child: Image.network(object.result[index].homeTeamLogo)),
+                              child: Image.network(object[index].homeTeamLogo)),
                         ],
                       ),
                     )
@@ -216,7 +205,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
               children: [
                 Expanded(flex: 1,
                   child:  Container(
-                    decoration: groupvalues[index]==int.parse(object.result[index].awayTeamKey) ? BoxDecoration(
+                    decoration: groupvalues[index]==int.parse(object[index].awayTeamKey) ? BoxDecoration(
 
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),),
                       color: Color(0xFf1BE37E),
@@ -225,7 +214,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       hoverColor: Colors.white,
                       activeColor: Colors.white,
                       focusColor: Colors.white,
-                      value:int.parse(object.result[index].awayTeamKey),
+                      value:int.parse(object[index].awayTeamKey),
                       groupValue: groupvalues[index],
                       onChanged: (val) {
                         Selectedvalue=val;
@@ -273,7 +262,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                   ),),
                 Expanded(flex: 1,
                   child:  Container(
-                    decoration: groupvalues[index]==int.parse(object.result[index].homeTeamKey) ? BoxDecoration(
+                    decoration: groupvalues[index]==int.parse(object[index].homeTeamKey) ? BoxDecoration(
 
                       borderRadius: BorderRadius.only(bottomRight: Radius.circular(10),),
                       color: Color(0xFf1BE37E),
@@ -282,7 +271,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       hoverColor: Colors.white,
                       activeColor: Colors.white,
                       focusColor: Colors.white,
-                      value:int.parse(object.result[index].homeTeamKey),
+                      value:int.parse(object[index].homeTeamKey),
                       groupValue: groupvalues[index],
                       onChanged: (val) {
                         Selectedvalue=val;

@@ -43,7 +43,7 @@ String get_name(String uid){
 
 
 Future<LoadMatchesApiModel> fetch_matches() async {
-  String url= 'https://allsportsapi.com/api/football/?&met=Fixtures&leagueId=327&APIkey=8891d99d1401ee19c7ac9f93810467b422605da68e708f4e0d3f08a5b7597456&from=2020-10-28&to=2020-10-30';
+  String url= 'https://allsportsapi.com/api/football/?&met=Fixtures&leagueId=327&APIkey=8891d99d1401ee19c7ac9f93810467b422605da68e708f4e0d3f08a5b7597456&from=2020-07-24&to=2020-12-01';
   final response= await http.get(url);
   if(response.statusCode==200){
     final String responsestring=response.body;
