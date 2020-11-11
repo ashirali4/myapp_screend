@@ -124,36 +124,41 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         children: <Widget>[
 
-                          ListTile(
-                            title: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                children: [Icon(Icons.supervised_user_circle,color: Colors.white.withOpacity(.7),),
-                                  SizedBox(width: 10,),
-                                  Text("My Profile",style: TextStyle(
-                                      fontFamily: "robo",
-                                      color: Colors.white.withOpacity(.7),
-                                      fontSize: 18
+                          // ListTile(
+                          //   title: Padding(
+                          //     padding: const EdgeInsets.only(left: 10),
+                          //     child: Row(
+                          //       children: [Icon(Icons.supervised_user_circle,color: Colors.white.withOpacity(.7),),
+                          //         SizedBox(width: 10,),
+                          //         Text("My Profile",style: TextStyle(
+                          //             fontFamily: "robo",
+                          //             color: Colors.white.withOpacity(.7),
+                          //             fontSize: 18
+                          //
+                          //         ),),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
 
-                                  ),),
-                                ],
-                              ),
-                            ),
-                          ),
+                          InkWell(
+                            onTap: (){
+                              Navigator.pushNamedAndRemoveUntil(context, "login", (route) => false);
+                            },
+                            child: ListTile(
+                              title:Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Row(
+                                  children: [Icon(Icons.exit_to_app,color: Colors.white.withOpacity(.7),),
+                                    SizedBox(width: 10,),
+                                    Text("Sign Off",style: TextStyle(
+                                        fontFamily: "robo",
+                                        color:Colors.white.withOpacity(.7),
+                                        fontSize: 18
 
-                          ListTile(
-                            title:Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                children: [Icon(Icons.exit_to_app,color: Colors.white.withOpacity(.7),),
-                                  SizedBox(width: 10,),
-                                  Text("Sign Off",style: TextStyle(
-                                      fontFamily: "robo",
-                                      color:Colors.white.withOpacity(.7),
-                                      fontSize: 18
-
-                                  ),),
-                                ],
+                                    ),),
+                                  ],
+                                ),
                               ),
                             ),
                           )
@@ -244,25 +249,25 @@ class _DashboardState extends State<Dashboard> {
 //                        Navigator.of(context).pop();
 //                      },
 //                    ),
-                    ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [Icon(MyFlutterApp.trophy__1_),
-                            SizedBox(width: 15,),
-                            Text("Top 10",style: TextStyle(
-                                fontFamily: "pb",
-                                fontSize: 18
-
-                            ),),
-                          ],
-                        ),
-                      ),
-
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
+//                     ListTile(
+//                       title: Padding(
+//                         padding: const EdgeInsets.all(8.0),
+//                         child: Row(
+//                           children: [Icon(MyFlutterApp.trophy__1_),
+//                             SizedBox(width: 15,),
+//                             Text("Top 10",style: TextStyle(
+//                                 fontFamily: "pb",
+//                                 fontSize: 18
+//
+//                             ),),
+//                           ],
+//                         ),
+//                       ),
+//
+//                       onTap: () {
+//                         Navigator.of(context).pop();
+//                       },
+//                     ),
 //                    ListTile(
 //                      title: Padding(
 //                        padding: const EdgeInsets.all(8.0),

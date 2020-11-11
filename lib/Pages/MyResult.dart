@@ -39,7 +39,7 @@ class _MyResultState extends State<MyResult> {
                         borderRadius: BorderRadius.all(Radius.circular(10))
                     ),
                     child:Center(
-                      child: Text("68",textAlign: TextAlign.start,
+                      child: Text("00",textAlign: TextAlign.start,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontFamily: "pb",
@@ -73,7 +73,7 @@ class _MyResultState extends State<MyResult> {
                                   fontFamily: "pb",
                                   fontSize: 18
                               ),),
-                            Text("14",textAlign: TextAlign.start,
+                            Text("00",textAlign: TextAlign.start,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "pb",
@@ -85,26 +85,26 @@ class _MyResultState extends State<MyResult> {
 
                   ),
                   SizedBox(height: 05,),
-                  Text("Your Matches",textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "pb",
-                        fontSize: 20
-                    ),),
-                  SizedBox(height: 15,),
-                  Expanded(
-                    child: ListView.separated(
-                      primary: false,
-                      shrinkWrap: true,
-                      itemCount: 5,
-                      separatorBuilder: (BuildContext context, int index)  {
-                        return SizedBox(height: 15,);
-                      },
-                      itemBuilder: (BuildContext context, int index) {
-                        return matchlistitem(index);
-                      },
-                    ),
-                  ),
+                  // Text("Your Matches",textAlign: TextAlign.start,
+                  //   style: TextStyle(
+                  //       fontWeight: FontWeight.w400,
+                  //       fontFamily: "pb",
+                  //       fontSize: 20
+                  //   ),),
+                  // SizedBox(height: 15,),
+                  // Expanded(
+                  //   child: ListView.separated(
+                  //     primary: false,
+                  //     shrinkWrap: true,
+                  //     itemCount: 5,
+                  //     separatorBuilder: (BuildContext context, int index)  {
+                  //       return SizedBox(height: 15,);
+                  //     },
+                  //     itemBuilder: (BuildContext context, int index) {
+                  //       return matchlistitem(index);
+                  //     },
+                  //   ),
+                  // ),
 
 
                 ],

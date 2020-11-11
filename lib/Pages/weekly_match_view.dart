@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:footballapp/Components/loader.dart';
+import 'package:footballapp/Components/mycusotom.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
 import 'package:footballapp/model/load_matches_api_model.dart';
 import 'package:footballapp/model/match_entry_model.dart';
@@ -67,10 +69,8 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                   side: BorderSide(color: Colors.green)),
               onPressed: () {
 
-                for(int a=0;a<matches.length;a++){
-                //  print(matches[a].winteamkey);
-                  insert_weekly_matches(widget.mylist.week,matches[a].matchid,matches[a],user.uid);
-                }
+
+                _responsehanddle();
 
               },
               color: Colors.green,
@@ -299,6 +299,78 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
       decoration: BoxDecoration(
 
       ),
+    );
+  }
+  Widget _responsehanddle(){
+    showAnimatedDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return ClassicGeneralDialogWidgettttt(
+          titleText: 'Confirm Picks?',
+          contentText: 'Please make sure you have right selections!',
+          onPositiveClick: () {
+            for(int a=0;a<matches.length;a++){
+              insert_weekly_matches(widget.mylist.week,matches[a].matchid,matches[a],user.uid);
+            }
+            Navigator.of(context).pop();
+            _responsehandle(message("Successfully Submitted", Icons.check_circle, Colors.green));
+          },
+          onNegativeClick: () {
+            Navigator.of(context).pop();
+          },
+        );
+      },
+      animationType: DialogTransitionType.slideFromBottomFade,
+      curve: Curves.fastOutSlowIn,
+      duration: Duration(seconds: 1),
+    );
+
+
+  }
+
+
+  Widget _responsehandle(Widget response){
+
+
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: (){
+            Navigator.pop(context);
+            //Navigator.pop(context);
+            return null;
+          },
+          child: GestureDetector(
+            onTap:(){
+              Navigator.pop(context);
+              //Navigator.pop(context);
+            },
+            child: Dialog(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: response,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+  Widget message(String message,IconData icon,Color color){
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        new Icon(icon,color: color,size: 50,),
+        SizedBox(height: 20,),
+        new Text(message,style: TextStyle(
+          fontFamily: "OpenSans",
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),),
+      ],
     );
   }
 }

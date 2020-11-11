@@ -41,7 +41,7 @@ class _LoginState extends State<Login> {
                          children: [
                            Icon(MyFlutterApp.football_ball_variant,color: Colors.white,size: 40,),
                            SizedBox(height: 10,),
-                           Text("Football Bidder",
+                           Text("Quiniela Futbolera",
                              style: TextStyle(
                                fontSize: 20,
                                fontWeight: FontWeight.w400,
@@ -112,6 +112,7 @@ class _LoginState extends State<Login> {
                               SizedBox(height: 20,),
                               TextFormField(
                                 controller: passcont,
+                                obscureText: true,
                                 validator: (value) {
                                   if (value.isEmpty) {
                                     return 'Please enter password';

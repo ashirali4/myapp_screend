@@ -52,7 +52,7 @@ class SignUpState extends State<SignUp> {
                             children: [
                               Icon(MyFlutterApp.football_ball_variant,color: Colors.white,size: 40,),
                               SizedBox(height: 10,),
-                              Text("Football Bidder",
+                              Text("Quiniela Futbolera",
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,
