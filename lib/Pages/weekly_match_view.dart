@@ -21,10 +21,16 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
   List<int> groupvalues=[];
   User user;
   int Selectedvalue=0;
+  int leftvalue=0;
+  int rightvalue=0;
   match_entry_model model;
   int selectedRadio=0;
   void initState(){
     user= auth.currentUser;
+    for(int a=0;a<widget.mylist.obj.length;a++){
+      model=new match_entry_model("NA","0",widget.mylist.obj[a].eventKey);
+      matches.add(model);
+    }
   //  mylist=fetch_matches();
 
   }
@@ -46,8 +52,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
               },
               padding: EdgeInsets.only(bottom: 20),
               itemBuilder: (BuildContext context, int index) {
-                model=new match_entry_model(Selectedvalue.toString(),"0",widget.mylist.obj[index].eventKey);
-                matches.add(model);
+
 
                 return matchlistitem(index,widget.mylist.obj);
               },
@@ -218,7 +223,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       groupValue: groupvalues[index],
                       onChanged: (val) {
                         Selectedvalue=val;
-                        matches[index].swinteamkey=val.toString();
+                        matches[index].swinteamkey=Selectedvalue.toString();
                         setSelectedRadio(val,index);
                       },
                     ),
@@ -251,7 +256,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                               onChanged: (val) {
                                 Selectedvalue=val;
 
-                                matches[index].swinteamkey=val.toString();
+                                matches[index].swinteamkey=Selectedvalue.toString();
 
                                 setSelectedRadio(val,index);
                               },
@@ -275,7 +280,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       groupValue: groupvalues[index],
                       onChanged: (val) {
                         Selectedvalue=val;
-                        matches[index].swinteamkey=val.toString();
+                        matches[index].swinteamkey=Selectedvalue.toString();
                         setSelectedRadio(val,index);
                    //     print(matches[index].winteamkey);
                       },
