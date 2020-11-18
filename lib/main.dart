@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: generateRoute,
       debugShowCheckedModeBanner: false,
-      home:Getting_Started(),
+      home:Login(),
       //Getting_Started(),
     );
   }

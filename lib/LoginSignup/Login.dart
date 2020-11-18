@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:footballapp/Components/loader.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
+import 'package:footballapp/model/LinkAPImodel.dart';
+import 'package:footballapp/APIcalls.dart';
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -236,11 +238,15 @@ class _LoginState extends State<Login> {
                                     if (formkey.currentState.validate()) {
                                       onLoading(context);
                                       try {
-                                        final  user = (await _auth.signInWithEmailAndPassword(
-                                        email: emailcont.text,
-                                        password: passcont.text,
-                                        )).user;
-                                     Navigator.pushNamed(context, "dashboard");
+                                        LinkApi apilink=await fetchlink();
+                                        if(apilink.apiurl!=null){
+                                          final  user = (await _auth.signInWithEmailAndPassword(
+                                            email: emailcont.text,
+                                            password: passcont.text,
+                                          )).user;
+                                          Navigator.pushNamed(context, "dashboard",arguments: apilink.apiurl);
+                                        }
+
                                     }
                                     catch (error) {
                                     //print(error.code);
@@ -262,6 +268,8 @@ class _LoginState extends State<Login> {
                                   },
                                   color: Colors.green,
                                   textColor: Colors.white,
+
+
                                   child: Text("Login with e-mail",
                                       style: TextStyle(fontSize: 14)),
                                 ),

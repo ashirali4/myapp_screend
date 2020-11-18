@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:footballapp/Components/loader.dart';
@@ -25,17 +26,38 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
   int Selectedvalue=0;
   int leftvalue=0;
   int rightvalue=0;
+  int tempvalue=123;
   match_entry_model model;
+  String temp;
   int selectedRadio=0;
+  Future<String> loadselection(String matchid,int index) async {
+
+    await databaseReference.child("Users").child(user.uid).child(widget.mylist.week).child(matchid).child("winteamkey").once().then((DataSnapshot snapshot) {
+      setState(() {
+        temp=snapshot.value;
+        print(snapshot.value);
+        groupvalues[index]=int.parse(snapshot.value);
+        matches[index].swinteamkey=snapshot.value;
+      });
+    });
+
+    return temp;
+  }
   void initState(){
     user= auth.currentUser;
     for(int a=0;a<widget.mylist.obj.length;a++){
-      model=new match_entry_model("NA","0",widget.mylist.obj[a].eventKey);
+      loadselection(widget.mylist.obj[a].eventKey,a);
+      groupvalues.add(tempvalue);
+    }
+    for(int a=0;a<widget.mylist.obj.length;a++){
+      model=new match_entry_model(groupvalues[a].toString(),"0",widget.mylist.obj[a].eventKey);
       matches.add(model);
     }
+
   //  mylist=fetch_matches();
 
   }
+
   setSelectedRadio(int val,int index) {
     setState(() {
       groupvalues[index] = val;
@@ -43,6 +65,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
   }
   @override
   Widget build(BuildContext context) {
+    print(temp);
     return Container(
       child: Column(
         children: [
@@ -85,10 +108,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
     );
   }
   Widget matchlistitem(int index,List<Result> object){
-    groupvalues.add(int.parse(object[index].eventKey));
-    print('adding agin');
-    print(matches[index].winteamkey);
-    return Container(
+    return  Container(
 // this is for
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -216,11 +236,13 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       color: Color(0xFf1BE37E),
                     ):null,
                     child: Radio(
+
                       hoverColor: Colors.white,
                       activeColor: Colors.white,
                       focusColor: Colors.white,
                       value:int.parse(object[index].awayTeamKey),
                       groupValue: groupvalues[index],
+
                       onChanged: (val) {
                         Selectedvalue=val;
                         matches[index].swinteamkey=Selectedvalue.toString();
@@ -282,7 +304,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                         Selectedvalue=val;
                         matches[index].swinteamkey=Selectedvalue.toString();
                         setSelectedRadio(val,index);
-                   //     print(matches[index].winteamkey);
+                        //     print(matches[index].winteamkey);
                       },
                     ),
                   ),),
@@ -300,7 +322,12 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
 
       ),
     );
+
+
   }
+
+
+
   Widget _responsehanddle(){
     showAnimatedDialog(
       context: context,

@@ -7,22 +7,32 @@ import 'package:footballapp/Pages/MyResult.dart';
 
 import '../APIcalls.dart';
 class Dashboard extends StatefulWidget {
+  String link;
   @override
   _DashboardState createState() => _DashboardState();
+   Dashboard(this.link);
+
 }
 
 class _DashboardState extends State<Dashboard> {
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   final databaseReference = FirebaseDatabase.instance.reference();
-
   User user;
-
+  List<Widget> mypages;
+  String link;
   @override
   void initState()  {
     // TODO: implement initState
      user= auth.currentUser;
+   //  link=widget.link;
+     mypages=[
+       Home_Page(widget.link),
+       MyResult()
+     ];
      super.initState();
   }
+
   Future<String> loadnmae() async {
    String temp;
     await databaseReference.child("Users").child(user.uid).child("name").once().then((DataSnapshot snapshot) {
@@ -33,10 +43,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   int currentindex=0;
-  List<Widget> mypages=[
-    Home_Page(),
-    MyResult()
-  ];
+
   Widget build(BuildContext context) {
 
    print("kkk");

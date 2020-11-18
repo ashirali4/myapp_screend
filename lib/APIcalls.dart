@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:footballapp/model/load_matches_api_model.dart';
 import 'package:http/http.dart' as http;
 
+import 'model/LinkAPImodel.dart';
 import 'model/match_entry_model.dart';
 final databaseReference = FirebaseDatabase.instance.reference();
 
@@ -37,13 +38,27 @@ String get_name(String uid){
 
 
 
+Future<LinkApi> fetchlink() async {
+  final response= await http.get('https://quinielafutbolera.com/api.php');
+  if(response.statusCode==200){
+    final String responsestring=response.body;
+    LinkApi list=linkApiFromJson(responsestring);
+    return list;
+  }
+  else{
+    final String responsestring=response.body;
+    LinkApi list=linkApiFromJson(responsestring);
+
+    return list;
+  }
+}
 
 
 
 
 
-Future<LoadMatchesApiModel> fetch_matches() async {
-  String url= 'https://allsportsapi.com/api/football/?&met=Fixtures&leagueId=327&APIkey=8891d99d1401ee19c7ac9f93810467b422605da68e708f4e0d3f08a5b7597456&from=2020-07-24&to=2020-12-01';
+Future<LoadMatchesApiModel> fetch_matches(String url) async {
+ // String url= 'https://allsportsapi.com/api/football/?&met=Fixtures&leagueId=327&APIkey=d68c026db9679d97be692e05553aa0846b8ee3e2bfdcf362fdf951e562f3dd6c&from=2020-07-24&to=2020-12-01';
   final response= await http.get(url);
   if(response.statusCode==200){
     final String responsestring=response.body;

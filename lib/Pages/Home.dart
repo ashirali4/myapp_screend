@@ -8,8 +8,10 @@ import 'package:footballapp/model/sender_fromweek_one.dart';
 
 import '../APIcalls.dart';
 class Home_Page extends StatefulWidget {
+  String k;
   @override
   _Home_PageState createState() => _Home_PageState();
+  Home_Page(this.k);
 }
 
 class _Home_PageState extends State<Home_Page> with TickerProviderStateMixin {
@@ -37,7 +39,7 @@ class _Home_PageState extends State<Home_Page> with TickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     _tabController = new TabController(length: 17, vsync: this, initialIndex: 1);
-    mylist=fetch_matches();
+    mylist=fetch_matches(widget.k);
 
    }
   @override
