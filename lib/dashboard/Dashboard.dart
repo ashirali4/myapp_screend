@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
 import 'package:footballapp/Pages/Home.dart';
+import 'package:footballapp/Pages/MyPool.dart';
 import 'package:footballapp/Pages/MyResult.dart';
 
 import '../APIcalls.dart';
@@ -28,6 +29,7 @@ class _DashboardState extends State<Dashboard> {
    //  link=widget.link;
      mypages=[
        Home_Page(widget.link),
+       MyPool(widget.link),
        MyResult()
      ];
      super.initState();
@@ -234,6 +236,9 @@ class _DashboardState extends State<Dashboard> {
                      ),
 
                      onTap: () {
+                       setState(() {
+                         currentindex=2;
+                       });
                        Navigator.of(context).pop();
                      },
                    ),
@@ -253,6 +258,9 @@ class _DashboardState extends State<Dashboard> {
                      ),
 
                      onTap: () {
+                       setState(() {
+                         currentindex=3;
+                       });
                        Navigator.of(context).pop();
                      },
                    ),
