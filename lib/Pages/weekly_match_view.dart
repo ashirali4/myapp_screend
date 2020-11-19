@@ -121,7 +121,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(MyFlutterApp.clock,color: Colors.white,size: 15,),
-                    Text(object[index].eventDate.toString(),style: TextStyle(
+                    Text(object[index].eventDate.toString().substring(0,10) + ' -'+object[index].eventTime.toString(),style: TextStyle(
                         fontFamily: "OpenSans",fontSize: 13
                     ),),
                   ],

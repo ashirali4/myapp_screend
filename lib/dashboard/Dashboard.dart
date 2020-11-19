@@ -218,44 +218,44 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.of(context).pop();
                       },
                     ),
-//                    ListTile(
-//                      title: Padding(
-//                        padding: const EdgeInsets.all(8.0),
-//                        child: Row(
-//                          children: [Icon(MyFlutterApp.calendar),
-//                            SizedBox(width: 15,),
-//                            Text("Tournaments",style: TextStyle(
-//                                fontFamily: "pb",
-//                                fontSize: 18
-//
-//                            ),),
-//                          ],
-//                        ),
-//                      ),
-//
-//                      onTap: () {
-//                        Navigator.of(context).pop();
-//                      },
-//                    ),
-//                    ListTile(
-//                      title: Padding(
-//                        padding: const EdgeInsets.all(8.0),
-//                        child: Row(
-//                          children: [Icon(MyFlutterApp.medical_result),
-//                            SizedBox(width: 15,),
-//                            Text("My Result",style: TextStyle(
-//                                fontFamily: "pb",
-//                                fontSize: 18
-//
-//                            ),),
-//                          ],
-//                        ),
-//                      ),
-//
-//                      onTap: () {
-//                        Navigator.of(context).pop();
-//                      },
-//                    ),
+                   ListTile(
+                     title: Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Row(
+                         children: [Icon(MyFlutterApp.calendar),
+                           SizedBox(width: 15,),
+                           Text("My Results",style: TextStyle(
+                               fontFamily: "pb",
+                               fontSize: 18
+
+                           ),),
+                         ],
+                       ),
+                     ),
+
+                     onTap: () {
+                       Navigator.of(context).pop();
+                     },
+                   ),
+                   ListTile(
+                     title: Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Row(
+                         children: [Icon(MyFlutterApp.trophy__1_),
+                           SizedBox(width: 15,),
+                           Text("Top 20",style: TextStyle(
+                               fontFamily: "pb",
+                               fontSize: 18
+
+                           ),),
+                         ],
+                       ),
+                     ),
+
+                     onTap: () {
+                       Navigator.of(context).pop();
+                     },
+                   ),
 //                     ListTile(
 //                       title: Padding(
 //                         padding: const EdgeInsets.all(8.0),
