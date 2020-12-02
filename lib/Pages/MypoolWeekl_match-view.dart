@@ -10,14 +10,14 @@ import 'package:footballapp/model/match_entry_model.dart';
 import 'package:footballapp/model/sender_fromweek_one.dart';
 
 import '../APIcalls.dart';
-class Weekly_Match_View extends StatefulWidget {
+class Pool_Weekly_Match_View extends StatefulWidget {
   sender mylist;
   @override
   _Weekly_Match_ViewState createState() => _Weekly_Match_ViewState();
-  Weekly_Match_View(this.mylist);
+  Pool_Weekly_Match_View(this.mylist);
 }
 
-class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
+class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   List<match_entry_model> matches=new List<match_entry_model>();
   Future<LoadMatchesApiModel> mylist;
@@ -54,7 +54,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
       matches.add(model);
     }
 
-  //  mylist=fetch_matches();
+    //  mylist=fetch_matches();
 
   }
 
@@ -83,25 +83,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
               },
             ),
           ),
-          Container(
-            height: 50,
-            width: MediaQuery.of(context).size.width,
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  side: BorderSide(color: Colors.green)),
-              onPressed: () {
 
-
-                _responsehanddle();
-
-              },
-              color: Colors.green,
-              textColor: Colors.white,
-              child: Text("Send Pools",
-                  style: TextStyle(fontSize: 14)),
-            ),
-          ),
 //
         ],
       ),
@@ -244,9 +226,9 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       groupValue: groupvalues[index],
 
                       onChanged: (val) {
-                        Selectedvalue=val;
-                        matches[index].swinteamkey=Selectedvalue.toString();
-                        setSelectedRadio(val,index);
+                        // Selectedvalue=val;
+                        // matches[index].swinteamkey=Selectedvalue.toString();
+                        // setSelectedRadio(val,index);
                       },
                     ),
                   ),),
@@ -275,12 +257,12 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
 
 
                               groupValue: groupvalues[index],
-                              onChanged: (val) {
-                                Selectedvalue=val;
-
-                                matches[index].swinteamkey=Selectedvalue.toString();
-
-                                setSelectedRadio(val,index);
+                            onChanged: (val) {
+                              //   Selectedvalue=val;
+                              //
+                              //   matches[index].swinteamkey=Selectedvalue.toString();
+                              //
+                              //   setSelectedRadio(val,index);
                               },
                             ),
                           ),
@@ -301,9 +283,9 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                       value:int.parse(object[index].homeTeamKey),
                       groupValue: groupvalues[index],
                       onChanged: (val) {
-                        Selectedvalue=val;
-                        matches[index].swinteamkey=Selectedvalue.toString();
-                        setSelectedRadio(val,index);
+                        // Selectedvalue=val;
+                        // matches[index].swinteamkey=Selectedvalue.toString();
+                        // setSelectedRadio(val,index);
                         //     print(matches[index].winteamkey);
                       },
                     ),
@@ -335,7 +317,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
       builder: (BuildContext context) {
         return ClassicGeneralDialogWidgettttt(
           titleText: 'Confirm Picks?',
-          contentText: 'Please check make you you selected all matches.',
+          contentText: 'Please make sure you have right selections!',
           onPositiveClick: () {
             for(int a=0;a<matches.length;a++){
               insert_weekly_matches(widget.mylist.week,matches[a].matchid,matches[a],user.uid);

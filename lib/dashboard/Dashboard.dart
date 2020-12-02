@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
 import 'package:footballapp/Pages/Home.dart';
+import 'package:footballapp/Pages/MyPool.dart';
 import 'package:footballapp/Pages/MyResult.dart';
 
 import '../APIcalls.dart';
@@ -28,6 +29,7 @@ class _DashboardState extends State<Dashboard> {
    //  link=widget.link;
      mypages=[
        Home_Page(widget.link),
+       MyPool(widget.link),
        MyResult()
      ];
      super.initState();
@@ -218,44 +220,50 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.of(context).pop();
                       },
                     ),
-//                    ListTile(
-//                      title: Padding(
-//                        padding: const EdgeInsets.all(8.0),
-//                        child: Row(
-//                          children: [Icon(MyFlutterApp.calendar),
-//                            SizedBox(width: 15,),
-//                            Text("Tournaments",style: TextStyle(
-//                                fontFamily: "pb",
-//                                fontSize: 18
-//
-//                            ),),
-//                          ],
-//                        ),
-//                      ),
-//
-//                      onTap: () {
-//                        Navigator.of(context).pop();
-//                      },
-//                    ),
-//                    ListTile(
-//                      title: Padding(
-//                        padding: const EdgeInsets.all(8.0),
-//                        child: Row(
-//                          children: [Icon(MyFlutterApp.medical_result),
-//                            SizedBox(width: 15,),
-//                            Text("My Result",style: TextStyle(
-//                                fontFamily: "pb",
-//                                fontSize: 18
-//
-//                            ),),
-//                          ],
-//                        ),
-//                      ),
-//
-//                      onTap: () {
-//                        Navigator.of(context).pop();
-//                      },
-//                    ),
+                   ListTile(
+                     title: Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Row(
+                         children: [Icon(MyFlutterApp.calendar),
+                           SizedBox(width: 15,),
+                           Text("My Results",style: TextStyle(
+                               fontFamily: "pb",
+                               fontSize: 18
+
+                           ),),
+                         ],
+                       ),
+                     ),
+
+                     onTap: () {
+                       setState(() {
+                         currentindex=2;
+                       });
+                       Navigator.of(context).pop();
+                     },
+                   ),
+                   ListTile(
+                     title: Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Row(
+                         children: [Icon(MyFlutterApp.trophy__1_),
+                           SizedBox(width: 15,),
+                           Text("Top 20",style: TextStyle(
+                               fontFamily: "pb",
+                               fontSize: 18
+
+                           ),),
+                         ],
+                       ),
+                     ),
+
+                     onTap: () {
+                       setState(() {
+                         currentindex=3;
+                       });
+                       Navigator.of(context).pop();
+                     },
+                   ),
 //                     ListTile(
 //                       title: Padding(
 //                         padding: const EdgeInsets.all(8.0),
