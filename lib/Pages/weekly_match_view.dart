@@ -335,7 +335,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
       builder: (BuildContext context) {
         return ClassicGeneralDialogWidgettttt(
           titleText: 'Confirm Picks?',
-          contentText: 'Please make sure you have right selections!',
+          contentText: 'Please check make you you selected all matches.',
           onPositiveClick: () {
             for(int a=0;a<matches.length;a++){
               insert_weekly_matches(widget.mylist.week,matches[a].matchid,matches[a],user.uid);
