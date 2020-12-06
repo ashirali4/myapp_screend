@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:footballapp/Components/loader.dart';
 import 'package:footballapp/Components/mycusotom.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
@@ -329,30 +330,118 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
 
 
   Widget _responsehanddle(){
-    showAnimatedDialog(
-      context: context,
+    showGeneralDialog(
+      barrierLabel:"Error",
       barrierDismissible: true,
-      builder: (BuildContext context) {
-        return ClassicGeneralDialogWidgettttt(
-          titleText: 'Confirm Picks?',
-          contentText: 'Please check make you you selected all matches.',
-          onPositiveClick: () {
-            for(int a=0;a<matches.length;a++){
-              insert_weekly_matches(widget.mylist.week,matches[a].matchid,matches[a],user.uid);
-            }
-            Navigator.of(context).pop();
-            _responsehandle(message("Successfully Submitted", Icons.check_circle, Colors.green));
-          },
-          onNegativeClick: () {
-            Navigator.of(context).pop();
-          },
+      barrierColor: Colors.black.withOpacity(0.8),
+      transitionDuration: Duration(milliseconds: 500),
+      context: context,
+      pageBuilder: (_, __, ___) {
+        return Align(
+          alignment: Alignment.center,
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              height: 220,
+              width: 220,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: SvgPicture.asset(
+                        "assets/dollar.svg",
+
+                    ),
+                  ),
+                  SizedBox(height: 05,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new Text("Please make sure you have selected all matches.",
+                      style: TextStyle(
+                        color: Color(0xff71828A),
+                        fontSize: 15,
+                        fontFamily: 'Poppins',
+                      ),
+                      textAlign: TextAlign.center,),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:05,right: 05),
+                    child: new Text("A 10\$ amount will be deducted for submitting picks.",
+                      style: TextStyle(
+                        color: Color(0xff71828A),
+                        fontSize: 08,
+                        fontFamily: 'Poppins',
+                      ),
+                      textAlign: TextAlign.center,),
+                  ),
+                   SizedBox(height: 8,),
+                   Padding(
+                     padding: const EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                       children: [
+                         Container(
+                           height: 30,
+                           width: 80,
+
+                           child: RaisedButton(
+                             shape: RoundedRectangleBorder(
+                                 borderRadius: BorderRadius.circular(4.0),
+                               ),
+                             onPressed: () {
+                               Navigator.of(context).pop();
+                             },
+                             color: Colors.black.withOpacity(.7),
+                             textColor: Colors.white,
+                             child: Text("NO".toUpperCase(),
+                                 style: TextStyle(fontSize: 14)),
+                           ),
+                         ),
+                         Container(
+                           height: 30,
+                           width: 80,
+                           child: RaisedButton(
+                             shape: RoundedRectangleBorder(
+                                 borderRadius: BorderRadius.circular(4.0),
+                                 ),
+                             onPressed: () {
+                               for(int a=0;a<matches.length;a++){
+                                 insert_weekly_matches(widget.mylist.week,matches[a].matchid,matches[a],user.uid);
+                               }
+                               Navigator.of(context).pop();
+                               firebasehanlder.pickmade();
+                               _responsehandle(message("Successfully Submitted", Icons.check_circle, Colors.green));
+
+
+                             },
+                             color: Color(0xFf1BE37E),                           textColor: Colors.white,
+                             child: Text("YES".toUpperCase(),
+                                 style: TextStyle(fontSize: 14)),
+                           ),
+                         ),
+                       ],
+                     ),
+                   )
+                ],
+              ),
+              margin: EdgeInsets.only(bottom: 25, left: 10, right: 10,top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
         );
       },
-      animationType: DialogTransitionType.slideFromBottomFade,
-      curve: Curves.fastOutSlowIn,
-      duration: Duration(seconds: 1),
+      transitionBuilder: (_, anim, __, child) {
+        return SlideTransition(
+          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+          child: child,
+        );
+      },
     );
-
 
   }
 

@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
 import 'package:footballapp/Pages/Home.dart';
 import 'package:footballapp/Pages/MyPool.dart';
 import 'package:footballapp/Pages/MyResult.dart';
+import 'package:footballapp/Pages/Top20.dart';
+import 'package:footballapp/model/Userdetailsmodel.dart';
 
 import '../APIcalls.dart';
 class Dashboard extends StatefulWidget {
@@ -16,7 +19,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
   final FirebaseAuth auth = FirebaseAuth.instance;
   final databaseReference = FirebaseDatabase.instance.reference();
   User user;
@@ -30,15 +32,18 @@ class _DashboardState extends State<Dashboard> {
      mypages=[
        Home_Page(widget.link),
        MyPool(widget.link),
-       MyResult()
+       MyResult(),
+       Topusers()
      ];
      super.initState();
   }
 
-  Future<String> loadnmae() async {
-   String temp;
-    await databaseReference.child("Users").child(user.uid).child("name").once().then((DataSnapshot snapshot) {
-      temp=snapshot.value;
+  Future<Userdetailmodel> loadnmae() async {
+    Userdetailmodel temp;
+    await databaseReference.child("Users").child(user.uid).once().then((DataSnapshot snapshot) {
+      temp=Userdetailmodel.fromSnapshot(snapshot);
+      print("sddddddddddddddd" + temp.email);
+      firebasehanlder.setbalance(temp.balance);
     });
     return temp;
   }
@@ -70,66 +75,85 @@ class _DashboardState extends State<Dashboard> {
                       color:  Color(0xFF212733),
                       child: ExpansionTile(
                         backgroundColor: Color(0xFF212733),
-                        title: Row(
-                          children: [
+                        title: Padding(
+                          padding: const EdgeInsets.only(top: 7,bottom: 7),
+                          child: Row(
+                            children: [
 
-                            Container(
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: CircleAvatar(
-                                  radius: 30.0,
-                                  backgroundImage:
-                                  AssetImage("assets/boy.png"),
-                                  backgroundColor: Colors.transparent,
-                                ),
-                              ),
-                              width: 60.0,
-                              height: 60.0,
-                              decoration: new BoxDecoration(
-                                color: Colors.transparent,
-
-                                borderRadius: new BorderRadius.all(new Radius.circular(50.0)),
-                                border: new Border.all(
-                                  color: Colors.white,
-                                  width: 2.0,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                new FutureBuilder<String>(
-                                  future: loadnmae(), // a Future<String> or null
-                                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                                    switch (snapshot.connectionState) {
-                                      case ConnectionState.none: return new Text('Press button to start');
-                                      case ConnectionState.waiting: return new Text('Awaiting result...');
-                                      default:
-                                        if (snapshot.hasError)
-                                          return new Text('Error: ${snapshot.error}');
-                                        else
-                                          return Text(
-                                            snapshot.data,
-                                            style: TextStyle(
-                                                color: Colors.white.withOpacity(.7),
-                                                fontSize: 18.0,
-                                                fontWeight: FontWeight.bold
-                                            ),
-                                          );
-                                    }
-                                  },
-                                ),
-
-                                Text(
-                                  user.email,
-                                  style: TextStyle(color: Colors.white.withOpacity(.7),
-                                    fontSize: 15.0,
+                              Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundImage:
+                                    AssetImage("assets/boy.png"),
+                                    backgroundColor: Colors.transparent,
                                   ),
                                 ),
-                              ],
-                            )
-                          ],
+                                width: 60.0,
+                                height: 60.0,
+                                decoration: new BoxDecoration(
+                                  color: Colors.transparent,
+
+                                  borderRadius: new BorderRadius.all(new Radius.circular(50.0)),
+                                  border: new Border.all(
+                                    color: Colors.white,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  new FutureBuilder<Userdetailmodel>(
+                                    future: loadnmae(), // a Future<String> or null
+                                    builder: (BuildContext context, AsyncSnapshot<Userdetailmodel> snapshot) {
+                                      switch (snapshot.connectionState) {
+                                        case ConnectionState.none: return new Text('Press button to start');
+                                        case ConnectionState.waiting: return new Text('Awaiting result...');
+                                        default:
+                                          if (snapshot.hasError)
+                                            return new Text('Error: ${snapshot.error}');
+                                          else{
+                                            return Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  snapshot.data.name,
+                                                  style: TextStyle(
+                                                      color: Colors.white.withOpacity(.7),
+                                                      fontSize: 18.0,
+                                                      fontWeight: FontWeight.bold
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "Balance: "+ firebasehanlder.balance.toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white.withOpacity(.7),
+                                                      fontSize: 15.0,
+                                                      fontWeight: FontWeight.w500
+                                                  ),
+                                                )
+
+                                              ],
+                                            );
+                                          }
+
+                                      }
+                                    },
+                                  ),
+
+                                  Text(
+                                    user.email,
+                                    style: TextStyle(color: Colors.white.withOpacity(.7),
+                                      fontSize: 13.0,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                         children: <Widget>[
 
@@ -149,7 +173,27 @@ class _DashboardState extends State<Dashboard> {
                           //     ),
                           //   ),
                           // ),
+                          InkWell(
+                            onTap: (){
+                              Navigator.pushNamedAndRemoveUntil(context, "login", (route) => false);
+                            },
+                            child: ListTile(
+                              title:Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Row(
+                                  children: [Icon(Icons.monetization_on_outlined,color: Colors.white.withOpacity(.7),),
+                                    SizedBox(width: 10,),
+                                    Text("Deposit",style: TextStyle(
+                                        fontFamily: "robo",
+                                        color:Colors.white.withOpacity(.7),
+                                        fontSize: 18
 
+                                    ),),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                           InkWell(
                             onTap: (){
                               Navigator.pushNamedAndRemoveUntil(context, "login", (route) => false);

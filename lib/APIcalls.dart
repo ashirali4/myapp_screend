@@ -72,3 +72,18 @@ Future<LoadMatchesApiModel> fetch_matches(String url) async {
     return list;
   }
 }
+
+
+class firebasehanlder{
+  static int balance=0;
+  static int getbalnce(){
+    return balance;
+  }
+  static void setbalance(String b){
+     balance=int.parse(b);
+  }
+
+  static void pickmade(){
+    balance=balance-10;
+  }
+}
