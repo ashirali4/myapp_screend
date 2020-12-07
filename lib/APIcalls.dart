@@ -92,7 +92,7 @@ class firebasehanlder{
   }
 
   static void create_history_value(String uid,String week){
-    var time = 9999999999999 - DateTime.now().microsecond;
+    var time = -DateTime.now().millisecondsSinceEpoch;
     databaseReference.child("Users").child(uid).child("history").push().set(
         {
           "time" : DateTime.now().toString(),

@@ -10,9 +10,13 @@ import '../APIcalls.dart';
 import 'MypoolWeekl_match-view.dart';
 class MyPool extends StatefulWidget {
   String k;
+  static final GlobalKey<MyPoolState> staticGlobalKey =
+  new GlobalKey<MyPoolState>();
+
+  MyPool(this.k) : super(key: MyPool.staticGlobalKey);
   @override
   MyPoolState createState() => MyPoolState();
-  MyPool(this.k);
+
 }
 
 class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
@@ -36,15 +40,40 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
   List<Result> lsitofmatchesr16=new List<Result>();
   List<Result> lsitofmatchesr17=new List<Result>();
 
+
   @override
   void initState() {
+
     // TODO: implement initState
     _tabController = new TabController(length: 17, vsync: this, initialIndex: 1);
-    mylist=fetch_matches(widget.k);
 
+  }
+  void refreshlist(){
+   lsitofmatchesr1.clear();
+    lsitofmatchesr2.clear();
+    lsitofmatchesr3.clear();
+    lsitofmatchesr4.clear();
+    lsitofmatchesr5.clear();
+    lsitofmatchesr6.clear();
+    lsitofmatchesr7.clear();
+     lsitofmatchesr8.clear();
+    lsitofmatchesr9.clear();
+    lsitofmatchesr10.clear();
+    lsitofmatchesr11.clear();
+    lsitofmatchesr12.clear();
+     lsitofmatchesr13.clear();
+     lsitofmatchesr14.clear();
+     lsitofmatchesr15.clear();
+   lsitofmatchesr16.clear();
+   lsitofmatchesr17.clear();
+   setState(() {
+
+   });
   }
   @override
   Widget build(BuildContext context) {
+    mylist=fetch_matches(widget.k);
+
     return SafeArea(
         child:Container(
           height: MediaQuery.of(context).size.height,

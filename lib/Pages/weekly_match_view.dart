@@ -6,11 +6,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:footballapp/Components/loader.dart';
 import 'package:footballapp/Components/mycusotom.dart';
 import 'package:footballapp/Icons/my_flutter_app_icons.dart';
+import 'package:footballapp/Pages/MyPool.dart';
 import 'package:footballapp/model/load_matches_api_model.dart';
 import 'package:footballapp/model/match_entry_model.dart';
 import 'package:footballapp/model/sender_fromweek_one.dart';
 
 import '../APIcalls.dart';
+import 'MypoolWeekl_match-view.dart';
 class Weekly_Match_View extends StatefulWidget {
   sender mylist;
   @override
@@ -95,6 +97,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
 
 
                 _responsehanddle();
+              MyPool.staticGlobalKey.currentState.refreshlist();
 
               },
               color: Colors.green,

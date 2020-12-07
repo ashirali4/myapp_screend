@@ -54,6 +54,7 @@ class _MyResultState extends State<Spendings> {
                           query: databaseReference.child("Users").child(auth.currentUser.uid).child("history").orderByChild("sort"),
                           itemBuilder: (BuildContext context, DataSnapshot snapshot,
                               Animation<double> animation, int index) {
+                            print("snsapshot" + snapshot.toString());
                             Map contact = snapshot.value;
                             return topmatchlistt(contact: contact);
                           },
@@ -121,7 +122,7 @@ class _MyResultState extends State<Spendings> {
                       ),
 
                       Text(
-                        "Correct Picks : "+picks,
+                          "Balance: "+ firebasehanlder.balance.toString() + " USD",
                         style: TextStyle(color: Colors.white.withOpacity(.7),
                           fontSize: 13.0,
                         ),
@@ -194,9 +195,9 @@ class _MyResultState extends State<Spendings> {
                       ),
 
                       Text(
-                        "Correct Picks : ",
+                        "Time: "+ contact['time'].toString().substring(0,19),
                         style: TextStyle(color: Colors.white.withOpacity(.7),
-                          fontSize: 13.0,
+                          fontSize: 10.0,
                         ),
                       ),
                     ],

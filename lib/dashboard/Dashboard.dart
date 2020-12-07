@@ -130,7 +130,7 @@ class _DashboardState extends State<Dashboard> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "Balance: "+ firebasehanlder.balance.toString(),
+                                                  "Balance: "+ firebasehanlder.balance.toString() + " USD",
                                                   style: TextStyle(
                                                       color: Colors.white.withOpacity(.7),
                                                       fontSize: 15.0,
@@ -382,7 +382,11 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
       ),
-      body:mypages[currentindex],
+      body:IndexedStack(
+          index:currentindex,
+          children:mypages
+      ),
+
 
     );
   }

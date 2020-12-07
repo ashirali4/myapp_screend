@@ -14,7 +14,9 @@ class Home_Page extends StatefulWidget {
   Home_Page(this.k);
 }
 
-class _Home_PageState extends State<Home_Page> with TickerProviderStateMixin {
+class _Home_PageState extends State<Home_Page> with TickerProviderStateMixin,AutomaticKeepAliveClientMixin<Home_Page> {
+
+
   TabController _tabController;
   Future<LoadMatchesApiModel> mylist;
   List<Result> lsitofmatchesr1=new List<Result>();
@@ -34,9 +36,12 @@ class _Home_PageState extends State<Home_Page> with TickerProviderStateMixin {
   List<Result> lsitofmatchesr15=new List<Result>();
   List<Result> lsitofmatchesr16=new List<Result>();
   List<Result> lsitofmatchesr17=new List<Result>();
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
+    super.build(context);
+
     // TODO: implement initState
     _tabController = new TabController(length: 17, vsync: this, initialIndex: 1);
     mylist=fetch_matches(widget.k);
@@ -44,6 +49,7 @@ class _Home_PageState extends State<Home_Page> with TickerProviderStateMixin {
    }
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child:Container(
           height: MediaQuery.of(context).size.height,

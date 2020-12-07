@@ -12,12 +12,18 @@ import 'package:footballapp/model/sender_fromweek_one.dart';
 import '../APIcalls.dart';
 class Pool_Weekly_Match_View extends StatefulWidget {
   sender mylist;
+
+
+
   @override
   _Weekly_Match_ViewState createState() => _Weekly_Match_ViewState();
   Pool_Weekly_Match_View(this.mylist);
+
 }
 
 class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
+
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   List<match_entry_model> matches=new List<match_entry_model>();
   Future<LoadMatchesApiModel> mylist;
@@ -47,6 +53,12 @@ class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
   }
   void initState(){
     user= auth.currentUser;
+    refreshdata();
+
+    //  mylist=fetch_matches();
+
+  }
+  void refreshdata(){
     for(int a=0;a<widget.mylist.obj.length;a++){
       loadselection(widget.mylist.obj[a].eventKey,a);
       groupvalues.add(tempvalue);
@@ -55,9 +67,6 @@ class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
       model=new match_entry_model(groupvalues[a].toString(),"0",widget.mylist.obj[a].eventKey);
       matches.add(model);
     }
-
-    //  mylist=fetch_matches();
-
   }
 
   setSelectedRadio(int val,int index) {
