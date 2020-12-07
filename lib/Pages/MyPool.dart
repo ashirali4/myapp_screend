@@ -59,8 +59,8 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: new DefaultTabController(
-              initialIndex: 0,
-              length: 1,
+              initialIndex: 16,
+              length: 17,
 
               child: new Scaffold(
                 backgroundColor: Colors.transparent,
@@ -77,6 +77,22 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
 
 
                             tabs: [
+                              tabbartext("Week-J01"),
+                              tabbartext("Week-J02"),
+                              tabbartext("Week-J03"),
+                              tabbartext("Week-J04"),
+                              tabbartext("Week-J05"),
+                              tabbartext("Week-J06"),
+                              tabbartext("Week-J07"),
+                              tabbartext("Week-J08"),
+                              tabbartext("Week-J09"),
+                              tabbartext("Week-J10"),
+                              tabbartext("Week-J11"),
+                              tabbartext("Week-J12"),
+                              tabbartext("Week-J13"),
+                              tabbartext("Week-J14"),
+                              tabbartext("Week-J15"),
+                              tabbartext("Week-J16"),
                               tabbartext("Current Week Pool - J17"),
 
 
@@ -186,6 +202,22 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
                               return new TabBarView(
 
                                 children: <Widget>[
+                                  Pool_Weekly_Match_View(week1),
+                                  Pool_Weekly_Match_View(week2),
+                                  Pool_Weekly_Match_View(week3),
+                                  Pool_Weekly_Match_View(week4),
+                                  Pool_Weekly_Match_View(week5),
+                                  Pool_Weekly_Match_View(week6),
+                                  Pool_Weekly_Match_View(week7),
+                                  Pool_Weekly_Match_View(week8),
+                                  Pool_Weekly_Match_View(week9),
+                                  Pool_Weekly_Match_View(week10),
+                                  Pool_Weekly_Match_View(week11),
+                                  Pool_Weekly_Match_View(week12),
+                                  Pool_Weekly_Match_View(week13),
+                                  Pool_Weekly_Match_View(week14),
+                                  Pool_Weekly_Match_View(week15),
+                                  Pool_Weekly_Match_View(week16),
                                   Pool_Weekly_Match_View(week17),
 
 

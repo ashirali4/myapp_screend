@@ -411,7 +411,8 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                                  insert_weekly_matches(widget.mylist.week,matches[a].matchid,matches[a],user.uid);
                                }
                                Navigator.of(context).pop();
-                               firebasehanlder.pickmade();
+                               firebasehanlder.pickmade(auth.currentUser.uid);
+                               firebasehanlder.create_history_value(auth.currentUser.uid,"Played : " + widget.mylist.week);
                                _responsehandle(message("Successfully Submitted", Icons.check_circle, Colors.green));
 
 

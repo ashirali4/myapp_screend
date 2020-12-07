@@ -6,6 +6,7 @@ import 'package:footballapp/Icons/my_flutter_app_icons.dart';
 import 'package:footballapp/Pages/Home.dart';
 import 'package:footballapp/Pages/MyPool.dart';
 import 'package:footballapp/Pages/MyResult.dart';
+import 'package:footballapp/Pages/Spendings.dart';
 import 'package:footballapp/Pages/Top20.dart';
 import 'package:footballapp/model/Userdetailsmodel.dart';
 
@@ -33,7 +34,8 @@ class _DashboardState extends State<Dashboard> {
        Home_Page(widget.link),
        MyPool(widget.link),
        MyResult(),
-       Topusers()
+       Topusers(),
+       Spendings()
      ];
      super.initState();
   }
@@ -308,6 +310,30 @@ class _DashboardState extends State<Dashboard> {
                        Navigator.of(context).pop();
                      },
                    ),
+                    ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [Icon(Icons.history_outlined,color: Colors.white.withOpacity(.7),),
+                            SizedBox(width: 15,),
+                            Text("Spendings",style: TextStyle(
+                                fontFamily: "pb",
+                                fontSize: 18
+
+                            ),),
+                          ],
+                        ),
+                      ),
+
+                      onTap: () {
+                        setState(() {
+                          currentindex=4;
+                        });
+                        Navigator.of(context).pop();
+                      },
+                    ),
+
+
 //                     ListTile(
 //                       title: Padding(
 //                         padding: const EdgeInsets.all(8.0),

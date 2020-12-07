@@ -27,6 +27,7 @@ void insert_weekly_matches(String week,String matchid,match_entry_model model,St
 
 String get_name(String uid){
   String name;
+
   databaseReference.child("Users").child(uid).child("name").once().then((DataSnapshot snapshot) {
     name=snapshot.value;
     print(name);
@@ -83,7 +84,25 @@ class firebasehanlder{
      balance=int.parse(b);
   }
 
-  static void pickmade(){
+  static void pickmade(String uid){
     balance=balance-10;
+    databaseReference.child("Users").child(uid).child("balance").set(
+      balance.toString());
+
   }
+
+  static void create_history_value(String uid,String week){
+    var time = 9999999999999 - DateTime.now().microsecond;
+    databaseReference.child("Users").child(uid).child("history").push().set(
+        {
+          "time" : DateTime.now().toString(),
+          "cost" : "-10",
+          "week" : week,
+          "sort" : time
+       });
+
+  }
+
+
+
 }

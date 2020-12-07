@@ -71,36 +71,7 @@ class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
     return Container(
       child: Column(
         children: [
-          Container(
-           width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8)),
 
-            // dropdown below..
-            child: DropdownButton<String>(
-              isExpanded: true,
-                value: dropdownValue,
-                icon: Icon(Icons.arrow_drop_down,color: Colors.black,),
-                iconSize: 42,
-                underline: SizedBox(),
-                onChanged: (String newValue) {
-                  setState(() {
-                    dropdownValue = newValue;
-                  });
-                },
-                items: <String>[
-                  'J14',
-                  'J15',
-                  'TJ16',
-                  'J17'
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList()),
-          ),
           Expanded(
             child: ListView.separated(
               itemCount: widget.mylist.obj.length,

@@ -56,16 +56,23 @@ class _MyResultState extends State<Topusers> {
                           fontSize: 20
                       ),),
                     SizedBox(height: 05,),
-                    Column(
-                      children: [
-                        topmatchlist("Ashir Ali","90","1"),
-                        topmatchlist("Hamza Ali","70","2"),
-                        topmatchlist("Usama Ali","60","3"),
-                        topmatchlist("Ahmar Ali","50","4"),
-                        topmatchlist("Niza Ali","40","5"),
+                   Expanded(
+                     child: ListView(
+                       padding: const EdgeInsets.only(bottom: kFloatingActionButtonMargin + 78),
 
-                      ],
-                    ),
+                       children: [
+                         topmatchlist("Ashir Ali","9","1","9"),
+                         topmatchlist("Hamza Ali","8","2","8"),
+                         topmatchlist("Usama Ali","7","3","7"),
+                         topmatchlist("Ahmar Ali","6","4","6"),
+                         topmatchlist("Niza Ali","5","5","5"),
+                         topmatchlist("Ahmar Ali","4","4","4"),
+                         topmatchlist("Niza Ali","3","3","3"),
+                         topmatchlist("Ahmar Ali","2","2","2"),
+                         topmatchlist("Niza Ali","1","1","1"),
+                       ],
+                     ),
+                   ),
 
                     SizedBox(height: 05,),
 
@@ -80,7 +87,7 @@ class _MyResultState extends State<Topusers> {
     );
   }
 
-  Widget topmatchlist(String username, String points, String index){
+  Widget topmatchlist(String username, String points, String index,String picks){
     return Padding(
       padding: const EdgeInsets.only(top: 03,bottom: 03),
       child: Container(
@@ -158,7 +165,7 @@ class _MyResultState extends State<Topusers> {
                       ),
 
                       Text(
-                        "Correct Picks : "+5.toString(),
+                        "Correct Picks : "+picks,
                         style: TextStyle(color: Colors.white.withOpacity(.7),
                           fontSize: 13.0,
                         ),
