@@ -8,6 +8,7 @@ import 'package:footballapp/Pages/MyPool.dart';
 import 'package:footballapp/Pages/MyResult.dart';
 import 'package:footballapp/Pages/Spendings.dart';
 import 'package:footballapp/Pages/Top20.dart';
+import 'package:footballapp/Pages/deposit.dart';
 import 'package:footballapp/model/Userdetailsmodel.dart';
 
 import '../APIcalls.dart';
@@ -35,7 +36,8 @@ class _DashboardState extends State<Dashboard> {
        MyPool(widget.link),
        MyResult(),
        Topusers(),
-       Spendings()
+       Spendings(),
+       Deposit()
      ];
      super.initState();
   }
@@ -200,7 +202,10 @@ class _DashboardState extends State<Dashboard> {
                           // ),
                           InkWell(
                             onTap: (){
-                              Navigator.pushNamed(context, "deposit");
+                              setState(() {
+                                currentindex=5;
+                              });
+                              Navigator.of(context).pop();
                             },
                             child: ListTile(
                               title:Padding(

@@ -8,18 +8,9 @@ class Deposit extends StatefulWidget {
 class _DepositState extends State<Deposit> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFf1BE37E),
-        title: Text("Deposit - Quiniela Futbolera"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined),
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: WebView(
+    return Container(
+
+      child: WebView(
         initialUrl: 'https://quinielafutbolera.com/',
       ),
     );
