@@ -50,20 +50,19 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
   }
   void refreshlist(){
    lsitofmatchesr1.clear();
-    lsitofmatchesr2.clear();
-    lsitofmatchesr3.clear();
-    lsitofmatchesr4.clear();
-    lsitofmatchesr5.clear();
-    lsitofmatchesr6.clear();
-    lsitofmatchesr7.clear();
-     lsitofmatchesr8.clear();
-    lsitofmatchesr9.clear();
-    lsitofmatchesr10.clear();
-    lsitofmatchesr11.clear();
-    lsitofmatchesr12.clear();
-     lsitofmatchesr13.clear();
-     lsitofmatchesr14.clear();
-     lsitofmatchesr15.clear();
+   lsitofmatchesr2.clear();
+   lsitofmatchesr3.clear();
+   lsitofmatchesr4.clear();
+   lsitofmatchesr5.clear();
+   lsitofmatchesr6.clear();
+   lsitofmatchesr7.clear();
+   lsitofmatchesr8.clear();
+   lsitofmatchesr10.clear();
+   lsitofmatchesr11.clear();
+   lsitofmatchesr12.clear();
+   lsitofmatchesr13.clear();
+   lsitofmatchesr14.clear();
+   lsitofmatchesr15.clear();
    lsitofmatchesr16.clear();
    lsitofmatchesr17.clear();
    setState(() {
