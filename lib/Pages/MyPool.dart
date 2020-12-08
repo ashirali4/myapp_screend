@@ -101,7 +101,7 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
                         children: <Widget>[
                           new TabBar(
 
-                            indicatorColor: Color(0xFf1BE37E),
+                            indicatorColor: Colors.grey,
                             isScrollable: true,
 
 

@@ -129,14 +129,7 @@ class _DashboardState extends State<Dashboard> {
                                                       fontWeight: FontWeight.bold
                                                   ),
                                                 ),
-                                                Text(
-                                                  "Balance: "+ firebasehanlder.balance.toString() + " USD",
-                                                  style: TextStyle(
-                                                      color: Colors.white.withOpacity(.7),
-                                                      fontSize: 15.0,
-                                                      fontWeight: FontWeight.w500
-                                                  ),
-                                                )
+
 
                                               ],
                                             );
@@ -158,7 +151,37 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                         children: <Widget>[
+                          FutureBuilder<Userdetailmodel>(
+                            future: loadnmae(), // a Future<String> or null
+                            builder: (BuildContext context, AsyncSnapshot<Userdetailmodel> snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.none: return new Text('Press button to start');
+                                case ConnectionState.waiting: return new Text('Awaiting result...');
+                                default:
+                                  if (snapshot.hasError)
+                                    return new Text('Error: ${snapshot.error}');
+                                  else{
+                                    return ListTile(
+                                      title:Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          children: [Icon(Icons.money,color: Colors.white.withOpacity(.7),),
+                                            SizedBox(width: 10,),
+                                            Text("Balance  : " + firebasehanlder.balance.toString()+" USD",style: TextStyle(
+                                                fontFamily: "robo",
+                                                color:Colors.white.withOpacity(.7),
+                                                fontSize: 18
 
+                                            ),),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }
+
+                              }
+                            },
+                          ),
                           // ListTile(
                           //   title: Padding(
                           //     padding: const EdgeInsets.only(left: 10),
@@ -177,7 +200,7 @@ class _DashboardState extends State<Dashboard> {
                           // ),
                           InkWell(
                             onTap: (){
-                              Navigator.pushNamedAndRemoveUntil(context, "login", (route) => false);
+                              Navigator.pushNamed(context, "deposit");
                             },
                             child: ListTile(
                               title:Padding(

@@ -114,8 +114,17 @@ class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Icon(MyFlutterApp.calendar__1_,color: Colors.white,size: 15,),
+                    SizedBox(width: 03,),
+
+                    Text(object[index].eventDate.toString().substring(0,10) ,style: TextStyle(
+                        fontFamily: "OpenSans",fontSize: 13
+                    ),),
+                    SizedBox(width: 05,),
                     Icon(MyFlutterApp.clock,color: Colors.white,size: 15,),
-                    Text(object[index].eventDate.toString().substring(0,10) + ' -'+object[index].eventTime.toString(),style: TextStyle(
+                    SizedBox(width: 03,),
+
+                    Text(object[index].eventTime.toString(),style: TextStyle(
                         fontFamily: "OpenSans",fontSize: 13
                     ),),
                   ],
@@ -227,7 +236,7 @@ class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
                     decoration: groupvalues[index]==int.parse(object[index].awayTeamKey) ? BoxDecoration(
 
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),),
-                      color: Color(0xFf1BE37E),
+                      color: Colors.grey,
                     ):null,
                     child: Radio(
 
@@ -247,7 +256,7 @@ class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
                 Expanded(flex: 1,
                   child:  Container(
                       decoration: groupvalues[index]==0 ? BoxDecoration(
-                        color: Color(0xFf1BE37E),
+                        color: Colors.grey,
                       ):null,
                       child: Column(
                         children: [
@@ -286,7 +295,7 @@ class _Weekly_Match_ViewState extends State<Pool_Weekly_Match_View> {
                     decoration: groupvalues[index]==int.parse(object[index].homeTeamKey) ? BoxDecoration(
 
                       borderRadius: BorderRadius.only(bottomRight: Radius.circular(10),),
-                      color: Color(0xFf1BE37E),
+                      color: Colors.grey,
                     ):null,
                     child: Radio(
                       hoverColor: Colors.white,
