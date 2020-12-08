@@ -36,6 +36,8 @@ dependencies:
   flutter_animated_dialog: ^1.1.0
   shared_preferences: ^0.5.12+4
   flutter_svg: ^0.18.1
+  webview_flutter: ^1.0.7
+
 
 
 

@@ -120,12 +120,21 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
           Row(
             children: [
               Expanded(
-                flex: 1,
+                flex: 3,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Icon(MyFlutterApp.calendar__1_,color: Colors.white,size: 15,),
+                    SizedBox(width: 03,),
+
+                    Text(object[index].eventDate.toString().substring(0,10) ,style: TextStyle(
+                        fontFamily: "OpenSans",fontSize: 13
+                    ),),
+                    SizedBox(width: 05,),
                     Icon(MyFlutterApp.clock,color: Colors.white,size: 15,),
-                    Text(object[index].eventDate.toString().substring(0,10) + ' -'+object[index].eventTime.toString(),style: TextStyle(
+                    SizedBox(width: 03,),
+
+                    Text(object[index].eventTime.toString(),style: TextStyle(
                         fontFamily: "OpenSans",fontSize: 13
                     ),),
                   ],

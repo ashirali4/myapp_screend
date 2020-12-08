@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footballapp/Pages/deposit.dart';
 import 'package:footballapp/dashboard/Dashboard.dart';
 import 'LoginSignup/SignUp.dart';
 import 'LoginSignup/Login.dart';
@@ -20,6 +21,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => Dashboard(link));
     case 'weeklyview':
       return MaterialPageRoute(builder: (context) => Weekly_Match_View(obj));
+    case 'deposit':
+      return MaterialPageRoute(builder: (context) => Deposit());
 
 
   }
