@@ -10,6 +10,7 @@ void insert_user_info(String uid,String email,String name){
   databaseReference.child("Users").child(uid).set({
     'uid': uid,
     'email': email,
+    'balance' : "1000",
     'name' : name
   });
 

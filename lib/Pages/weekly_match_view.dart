@@ -33,6 +33,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
   match_entry_model model;
   String temp;
   int selectedRadio=0;
+  bool checkvalue=true;
   Future<String> loadselection(String matchid,int index) async {
 
     await databaseReference.child("Users").child(user.uid).child(widget.mylist.week).child(matchid).child("winteamkey").once().then((DataSnapshot snapshot) {
@@ -41,6 +42,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
         print(snapshot.value);
         groupvalues[index]=int.parse(snapshot.value);
         matches[index].swinteamkey=snapshot.value;
+        checkvalue=false;
       });
     });
 
@@ -96,8 +98,14 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
               onPressed: () {
 
 
-                _responsehanddle();
-              MyPool.staticGlobalKey.currentState.refreshlist();
+                if(checkvalue){
+                  _responsehanddle();
+                  MyPool.staticGlobalKey.currentState.refreshlist();
+
+                }
+                else{
+                  alreadysubmit();
+                }
 
               },
               color: Colors.green,
@@ -425,6 +433,7 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
                                Navigator.of(context).pop();
                                firebasehanlder.pickmade(auth.currentUser.uid);
                                firebasehanlder.create_history_value(auth.currentUser.uid,"Played : " + widget.mylist.week);
+                               checkvalue=false;
                                _responsehandle(message("Successfully Submitted", Icons.check_circle, Colors.green));
 
 
@@ -457,6 +466,99 @@ class _Weekly_Match_ViewState extends State<Weekly_Match_View> {
     );
 
   }
+
+
+  Widget alreadysubmit(){
+    showGeneralDialog(
+      barrierLabel:"Error",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.8),
+      transitionDuration: Duration(milliseconds: 500),
+      context: context,
+      pageBuilder: (_, __, ___) {
+        return Align(
+          alignment: Alignment.center,
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              height: 220,
+              width: 220,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: SvgPicture.asset(
+                      "assets/report.svg",
+
+                    ),
+                  ),
+                  SizedBox(height: 05,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new Text("You've Already Submitted.",
+                      style: TextStyle(
+                        color: Color(0xff71828A),
+                        fontSize: 15,
+                        fontFamily: 'Poppins',
+                      ),
+                      textAlign: TextAlign.center,),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:05,right: 05),
+                    child: new Text("You can only submit a pool once. Thanks!",
+                      style: TextStyle(
+                        color: Color(0xff71828A),
+                        fontSize: 08,
+                        fontFamily: 'Poppins',
+                      ),
+                      textAlign: TextAlign.center,),
+                  ),
+                  SizedBox(height: 8,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
+                    child:  Center(
+                      child: Container(
+                        height: 30,
+                        width: 80,
+
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          color: Colors.black.withOpacity(.7),
+                          textColor: Colors.white,
+                          child: Text("CLOSE".toUpperCase(),
+                              style: TextStyle(fontSize: 14)),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              margin: EdgeInsets.only(bottom: 25, left: 10, right: 10,top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (_, anim, __, child) {
+        return SlideTransition(
+          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+          child: child,
+        );
+      },
+    );
+
+  }
+
 
 
   Widget _responsehandle(Widget response){
