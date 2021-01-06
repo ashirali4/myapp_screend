@@ -33,17 +33,10 @@ class _Getting_StartedState extends State<Getting_Started> {
                       child:
                       Column(
                         children: [
-                          Icon(MyFlutterApp.football_ball_variant,color: Colors.white,size: 40,),
-                          SizedBox(height: 10,),
-                          Text("Quiniela Futbolera",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.italic,
-                              fontFamily: 'OpenSans',
-                              color: Colors.white,
-                            ),
-                          ),
+                          Container(
+                              height: 120,
+                              width: 120,
+                              child: Image.asset("assets/qlogo.png")),
                         ],
                       )
                   ),

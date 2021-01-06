@@ -39,20 +39,17 @@ class _LoginState extends State<Login> {
                    padding: const EdgeInsets.only(top: 70),
                    child: Container(
                        child:
-                       Column(
-                         children: [
-                           Icon(MyFlutterApp.football_ball_variant,color: Colors.white,size: 40,),
-                           SizedBox(height: 10,),
-                           Text("Quiniela Futbolera",
-                             style: TextStyle(
-                               fontSize: 20,
-                               fontWeight: FontWeight.w400,
-                               fontStyle: FontStyle.italic,
-                               fontFamily: 'OpenSans',
-                               color: Colors.white,
-                             ),
-                           ),
-                         ],
+                       SingleChildScrollView(
+                         child: Column(
+                           children: [
+
+                             Container(
+                                 height: 100,
+                                 width: 100,
+                                 child: Image.asset("assets/qlogo.png")),
+
+                           ],
+                         ),
                        )
                    ),
                  ),
