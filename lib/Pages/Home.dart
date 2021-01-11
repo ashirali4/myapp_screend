@@ -64,7 +64,7 @@ class _Home_PageState extends State<Home_Page> with TickerProviderStateMixin,Aut
           child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: new DefaultTabController(
-                initialIndex: 16,
+                initialIndex: 0,
                 length: 17,
 
                 child: new Scaffold(

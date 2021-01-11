@@ -87,7 +87,7 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: new DefaultTabController(
-              initialIndex: 16,
+              initialIndex: 0,
               length: 17,
 
               child: new Scaffold(
@@ -105,7 +105,7 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
 
 
                             tabs: [
-                              tabbartext("Week-J01"),
+                              tabbartext("Week-J01 - Current"),
                               tabbartext("Week-J02"),
                               tabbartext("Week-J03"),
                               tabbartext("Week-J04"),
@@ -121,7 +121,7 @@ class MyPoolState extends State<MyPool> with TickerProviderStateMixin {
                               tabbartext("Week-J14"),
                               tabbartext("Week-J15"),
                               tabbartext("Week-J16"),
-                              tabbartext("Current Week Pool - J17"),
+                              tabbartext("Week-J17"),
 
 
 
